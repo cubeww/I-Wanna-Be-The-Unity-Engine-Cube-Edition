@@ -29,8 +29,13 @@ public class Player : MonoBehaviour
 
     PixelPerfectCollider collider;
     public BloodEmitter bloodEmitter;
+    public Bullet bullet;
 
     string currentAnimation;
+
+    public AudioSource jumpSound;
+    public AudioSource djumpSound;
+    public AudioSource shootSound;
 
     void Start()
     {
@@ -102,6 +107,9 @@ public class Player : MonoBehaviour
         {
             vspeed = Sign(vspeed) * maxVspeed;
         }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+            Shoot();
 
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             Jump();
@@ -188,17 +196,28 @@ public class Player : MonoBehaviour
         {
             vspeed = -jump;
             djump = true;
+            jumpSound.Play();
         }
         else if (djump)
         {
             currentAnimation = "Jump";
             vspeed = -jump2;
             djump = false;
+            djumpSound.Play();
         }
     }
     void VJump()
     {
         if (vspeed > 0)
             vspeed *= 0.45f;
+    }
+    void Shoot()
+    {
+        if (GameObject.FindObjectsOfType<Bullet>().Length < 4)
+        {
+            var inst = GameObject.Instantiate(bullet);
+            inst.transform.position = new Vector3(x, y);
+            shootSound.Play();
+        }
     }
 }

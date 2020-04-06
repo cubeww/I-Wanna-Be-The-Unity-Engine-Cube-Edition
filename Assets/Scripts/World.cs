@@ -52,15 +52,18 @@ public class World : MonoBehaviour
 
     void Update()
     {
-        // Restart game
-        if (Input.GetKeyDown(KeyCode.R))
+        if (gameStarted)
         {
-            SaveGame(false);
-            LoadGame(false);
-        }
+            // Restart game
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SaveGame(false);
+                LoadGame(false);
+            }
 
-        // Update title
-        windowCaption.SetWindowCaption(roomCaption);
+            // Update title
+            windowCaption.SetWindowCaption(roomCaption);
+        }
     }
 
     public static void LoadGame(bool loadFile)

@@ -1799,12 +1799,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7940218150493441083, guid: 19b8ea2a2b1fc9a44833a91169799d45, type: 3}
+      propertyPath: djumpSound
+      value: 
+      objectReference: {fileID: 7940218149862207165}
+    - target: {fileID: 7940218150493441083, guid: 19b8ea2a2b1fc9a44833a91169799d45, type: 3}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 7940218149862207164}
     - target: {fileID: 7940218150493441220, guid: 19b8ea2a2b1fc9a44833a91169799d45, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19b8ea2a2b1fc9a44833a91169799d45, type: 3}
+--- !u!82 &7940218149862207164 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6394834811989796355, guid: 19b8ea2a2b1fc9a44833a91169799d45, type: 3}
+  m_PrefabInstance: {fileID: 7940218149862207163}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &7940218149862207165 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3058102049328234408, guid: 19b8ea2a2b1fc9a44833a91169799d45, type: 3}
+  m_PrefabInstance: {fileID: 7940218149862207163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9046691917093847535
 PrefabInstance:
   m_ObjectHideFlags: 0
