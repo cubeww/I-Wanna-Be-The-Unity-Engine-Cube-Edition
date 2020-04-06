@@ -260,6 +260,19 @@ public class PixelPerfectCollider : MonoBehaviour
             right1 = RoundToInt(x + (right + 1) * xscale - 1);
             top1 = RoundToInt(y + (top + 1) * yscale - 1);
             bottom1 = RoundToInt(y + bottom * yscale);
+            int tmp;
+            if (left1 > right1)
+            {
+                tmp = right1;
+                right1 = left1;
+                left1 = tmp;
+            }
+            if (bottom1 > top1)
+            {
+                tmp = top1;
+                top1 = bottom1;
+                bottom1 = tmp;
+            }
         }
         else
         {
