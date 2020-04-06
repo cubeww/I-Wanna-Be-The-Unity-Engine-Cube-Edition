@@ -18,8 +18,8 @@ public class Player : MonoBehaviour
     float vspeed = 0;
     float gravity = -0.4f;
 
-    float x;
-    float y;
+    public float x;
+    public float y;
     float xprevious;
     float yprevious;
 
@@ -41,6 +41,12 @@ public class Player : MonoBehaviour
 
         x = transform.position.x;
         y = transform.position.y;
+
+        if (World.autosave)
+        {
+            World.SaveGame(true);
+            World.autosave = false;
+        }
     }
 
     void Update()
