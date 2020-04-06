@@ -151,9 +151,10 @@ public class PixelPerfectCollider : MonoBehaviour
         GetBoundingBox(left, right, top, bottom, out var left1, out var right1, out var top1, out var bottom1,
             x1, y1, xScale, yScale, rotation);
 
+        // For each colliders
         foreach (var i in cders)
         {
-            if (i == this)
+            if (i == this) // Don't check himself
                 continue;
 
             var x2 = i.xPos;
@@ -169,32 +170,70 @@ public class PixelPerfectCollider : MonoBehaviour
             int iBottom = Max(bottom1, bottom2);
             int iTop = Min(top1, top2);
 
-            // Check each pixel
-            var sina1 = Sin(-rotation * Deg2Rad);
-            var cosa1 = Cos(-rotation * Deg2Rad);
+            if (iLeft > iRight || iBottom > iTop)
+                continue;
 
-            var sina2 = Sin(-i.rotation * Deg2Rad);
-            var cosa2 = Cos(-i.rotation * Deg2Rad);
-            for (int xx = iLeft; xx <= iRight; xx++)
+            // Check each pixel
+            if (rotation == 0 && i.rotation == 0)
             {
+                // Not rotated
+                var xo1 = xPivot;
+                var yo1 = yPivot;
+
+                var xo2 = i.xPivot;
+                var yo2 = i.yPivot;
+
                 for (int yy = iBottom; yy <= iTop; yy++)
                 {
-                    var lx1 = xx - x1;
-                    var ly1 = yy - y1;
-                    RotateAround(lx1, ly1, 0, 0, sina1, cosa1, out var lx1a, out var ly1a);
-                    var px1 = (int)(lx1a / xScale + xPivot);
-                    var py1 = (int)(ly1a / yScale + yPivot);
-                    var p1 = px1 >= 0 && py1 >= 0 && px1 < width && py1 < height && boolData[px1 + py1 * width];
+                    for (int xx = iLeft; xx <= iRight; xx++)
+                    {
+                        var px1 = (int)((xx - x1) / xScale + xo1);
+                        var py1 = (int)((yy - y1) / yScale + yo1);
+                        var p1 = px1 >= 0 && py1 >= 0 && px1 < width && py1 < height && boolData[px1 + py1 * width];
 
-                    var lx2 = xx - x2;
-                    var ly2 = yy - y2;
-                    RotateAround(lx2, ly2, 0, 0, sina2, cosa2, out var lx2a, out var ly2a);
-                    var px2 = (int)(lx2a / i.xScale + i.xPivot);
-                    var py2 = (int)(ly2a / i.yScale + i.yPivot);
-                    var p2 = px2 >= 0 && py2 >= 0 && px2 < i.width && py2 < i.height && i.boolData[px2 + py2 * i.width];
+                        var px2 = (int)((xx - x2) / i.xScale + xo2);
+                        var py2 = (int)((yy - y2) / i.yScale + yo2);
+                        var p2 = px2 >= 0 && py2 >= 0 && px2 < i.width && py2 < i.height && i.boolData[px2 + py2 * i.width];
 
-                    if (p1 && p2)
-                        return true;
+                        if (p1 && p2)
+                            return true;
+                    }
+                }
+            }
+            else
+            {
+                // Rotated
+                var sina1 = Sin(-rotation * Deg2Rad);
+                var cosa1 = Cos(-rotation * Deg2Rad);
+                var xo1 = xPivot;
+                var yo1 = yPivot;
+
+                var sina2 = Sin(-i.rotation * Deg2Rad);
+                var cosa2 = Cos(-i.rotation * Deg2Rad);
+                var xo2 = i.xPivot;
+                var yo2 = i.yPivot;
+
+                for (int yy = iBottom; yy <= iTop; yy++)
+                {
+                    for (int xx = iLeft; xx <= iRight; xx++)
+                    {
+                        var lx1 = xx - x1;
+                        var ly1 = yy - y1;
+                        RotateAround(lx1, ly1, 0, 0, sina1, cosa1, out var lx1a, out var ly1a);
+                        var px1 = (int)(lx1a / xScale + xo1);
+                        var py1 = (int)(ly1a / yScale + yo1);
+                        var p1 = px1 >= 0 && py1 >= 0 && px1 < width && py1 < height && boolData[px1 + py1 * width];
+
+                        var lx2 = xx - x2;
+                        var ly2 = yy - y2;
+                        RotateAround(lx2, ly2, 0, 0, sina2, cosa2, out var lx2a, out var ly2a);
+                        var px2 = (int)(lx2a / i.xScale + xo2);
+                        var py2 = (int)(ly2a / i.yScale + yo2);
+                        var p2 = px2 >= 0 && py2 >= 0 && px2 < i.width && py2 < i.height && i.boolData[px2 + py2 * i.width];
+
+                        if (p1 && p2)
+                            return true;
+                    }
                 }
             }
         }
@@ -209,19 +248,31 @@ public class PixelPerfectCollider : MonoBehaviour
     static void GetBoundingBox(int left, int right, int top, int bottom, out int left1, out int right1, out int top1, out int bottom1,
         float x, float y, float xscale, float yscale, float angle)
     {
-        angle *= Deg2Rad;
-        var sina = Sin(angle);
-        var cosa = Cos(angle);
+        if (angle == 0)
+        {
+            // Not rotated
+            left1 = RoundToInt(x + left * xscale);
+            right1 = RoundToInt(x + (right + 1) * xscale - 1);
+            top1 = RoundToInt(y + (top + 1) * yscale - 1);
+            bottom1 = RoundToInt(y + bottom * yscale);
+        }
+        else
+        {
+            // Rotated
+            angle *= Deg2Rad;
+            var sina = Sin(angle);
+            var cosa = Cos(angle);
 
-        RotateAround(x + left * xscale, y + bottom * yscale, x, y, sina, cosa, out var xlb, out var ylb);
-        RotateAround(x + (right + 1) * xscale - 1, y + bottom * yscale, x, y, sina, cosa, out var xrb, out var yrb);
-        RotateAround(x + left * xscale, y + (top + 1) * yscale - 1, x, y, sina, cosa, out var xlt, out var ylt);
-        RotateAround(x + (right + 1) * xscale - 1, y + (top + 1) * yscale - 1, x, y, sina, cosa, out var xrt, out var yrt);
+            RotateAround(x + left * xscale, y + bottom * yscale, x, y, sina, cosa, out var xlb, out var ylb);
+            RotateAround(x + (right + 1) * xscale - 1, y + bottom * yscale, x, y, sina, cosa, out var xrb, out var yrb);
+            RotateAround(x + left * xscale, y + (top + 1) * yscale - 1, x, y, sina, cosa, out var xlt, out var ylt);
+            RotateAround(x + (right + 1) * xscale - 1, y + (top + 1) * yscale - 1, x, y, sina, cosa, out var xrt, out var yrt);
 
-        left1 = (int)(Min(xlb, xrb, xlt, xrt) + 0.5f);
-        right1 = (int)(Max(xlb, xrb, xlt, xrt) + 0.5f);
-        bottom1 = (int)(Min(ylb, yrb, ylt, yrt) + 0.5f);
-        top1 = (int)(Max(ylb, yrb, ylt, yrt) + 0.5f);
+            left1 = RoundToInt(Min(xlb, xrb, xlt, xrt));
+            right1 = RoundToInt(Max(xlb, xrb, xlt, xrt));
+            bottom1 = RoundToInt(Min(ylb, yrb, ylt, yrt));
+            top1 = RoundToInt(Max(ylb, yrb, ylt, yrt));
+        }
     }
 
     static void RotateAround(float xs, float ys, float xo, float yo, float sina, float cosa, out float ox, out float oy)
