@@ -11,7 +11,7 @@ public class World : MonoBehaviour
     string roomCaption = "I Wanna Be The Unity Engine Cube Edition";
     WindowCaption windowCaption = new WindowCaption();
 
-    public static int savenum = 0;
+    public static int savenum = 1;
     public static Difficulty difficulty = Difficulty.Medium;
     public enum Difficulty
     {
@@ -33,6 +33,7 @@ public class World : MonoBehaviour
     public static float savePlayerY;
     public static int saveGrav;
 
+    // May move these to separate class
     public static Dictionary<Texture2D, MaskData> maskDataManager = new Dictionary<Texture2D, MaskData>();
     public static Dictionary<string, List<PixelPerfectCollider>> colliders = new Dictionary<string, List<PixelPerfectCollider>>();
 
@@ -48,6 +49,9 @@ public class World : MonoBehaviour
 
         // Initialize game
         windowCaption.SetWindowCaption(roomCaption);
+
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 50;
     }
 
     void Update()

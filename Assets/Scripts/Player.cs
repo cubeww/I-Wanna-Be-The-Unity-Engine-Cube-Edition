@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 
     public GameObject sprite;
 
+    public World world;
     PixelPerfectCollider collider;
     public BloodEmitter bloodEmitter;
     public Bullet bullet;
@@ -36,12 +37,19 @@ public class Player : MonoBehaviour
     public AudioSource jumpSound;
     public AudioSource djumpSound;
     public AudioSource shootSound;
+    public AudioSource walljumpSound;
 
     void Start()
     {
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 50;
-
+#if UNITY_EDITOR
+        // Do something to help us debug the level
+        if (GameObject.FindObjectsOfType<World>().Length < 1)
+        {
+            GameObject.Instantiate(world);
+            World.autosave = true;
+            World.gameStarted = true;
+        }
+#endif
         collider = GetComponent<PixelPerfectCollider>();
 
         x = transform.position.x;
@@ -59,8 +67,8 @@ public class Player : MonoBehaviour
         xprevious = x;
         yprevious = y;
 
-        var L = World.GetKeyPersistently(37);
-        var R = World.GetKeyPersistently(39);
+        var L = Input.GetKey(KeyCode.LeftArrow);
+        var R = Input.GetKey(KeyCode.RightArrow);
 
         var h = 0;
 
@@ -68,6 +76,10 @@ public class Player : MonoBehaviour
             h = 1;
         else if (L)
             h = -1;
+
+        var notOnBlock = !collider.PlaceMeeting(x, y - 1, "Block");
+        var onVineL = collider.PlaceMeeting(x - 1, y, "WalljumpL") && notOnBlock;
+        var onVineR = collider.PlaceMeeting(x + 1, y, "WalljumpR") && notOnBlock;
 
         if (h != 0)
         {
@@ -116,6 +128,43 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
             VJump();
+
+        // Walljumps
+        if (onVineL || onVineR)
+        {
+            if (onVineR)
+                sprite.transform.localScale = new Vector3(-1, 1);
+            else
+                sprite.transform.localScale = new Vector3(1, 1);
+
+            vspeed = -2;
+            currentAnimation = "Sliding";
+
+            if ((onVineL && Input.GetKeyDown(KeyCode.RightArrow)) || (onVineR && Input.GetKeyDown(KeyCode.LeftArrow)))
+            {
+                if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                {
+                    if (onVineR)
+                        hspeed = -15;
+                    else
+                        hspeed = 15;
+
+                    vspeed = 9;
+
+                    walljumpSound.Play();
+                    currentAnimation = "Jump";
+                }
+                else
+                {
+                    if (onVineR)
+                        hspeed = -3;
+                    else
+                        hspeed = 3;
+
+                    currentAnimation = "Fall";
+                }
+            }
+        }
 
         // Move
         vspeed += gravity;
