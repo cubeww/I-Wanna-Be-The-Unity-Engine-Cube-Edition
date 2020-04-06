@@ -137,12 +137,17 @@ public class PixelPerfectCollider : MonoBehaviour
 
     public bool PlaceMeeting(float x, float y, string tag)
     {
+        return InstancePlace(x, y, tag) != null;
+    }
+
+    public GameObject InstancePlace(float x, float y, string tag)
+    {
         if (!World.colliders.ContainsKey(tag))
-            return false;
+            return null;
 
         var cders = World.colliders[tag];
         if (cders.Count == 0)
-            return false;
+            return null;
 
         var x1 = x;
         var y1 = y;
@@ -196,7 +201,7 @@ public class PixelPerfectCollider : MonoBehaviour
                         var p2 = px2 >= 0 && py2 >= 0 && px2 < i.width && py2 < i.height && i.boolData[px2 + py2 * i.width];
 
                         if (p1 && p2)
-                            return true;
+                            return i.gameObject;
                     }
                 }
             }
@@ -232,12 +237,12 @@ public class PixelPerfectCollider : MonoBehaviour
                         var p2 = px2 >= 0 && py2 >= 0 && px2 < i.width && py2 < i.height && i.boolData[px2 + py2 * i.width];
 
                         if (p1 && p2)
-                            return true;
+                            return i.gameObject;
                     }
                 }
             }
         }
-        return false;
+        return null;
     }
 
     void OnDestroy()

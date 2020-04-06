@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Block
-  - Blood
   - Killer
+  - Platform
+  - Blood
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Block
+    uniqueID: 829553203
+    locked: 0
+  - name: Vine
+    uniqueID: 2966261971
+    locked: 0
+  - name: Player
+    uniqueID: 2991620141
+    locked: 0
+  - name: Platform
+    uniqueID: 2825367461
+    locked: 0
+  - name: Killer
+    uniqueID: 2259209365
     locked: 0

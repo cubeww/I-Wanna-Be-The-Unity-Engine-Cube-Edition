@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     float xprevious;
     float yprevious;
 
+    bool onPlatform = false;
+
     public GameObject sprite;
 
     PixelPerfectCollider collider;
@@ -71,13 +73,23 @@ public class Player : MonoBehaviour
         }
         hspeed = maxSpeed * h;
 
-        if (vspeed > 0.05)
+        if (!onPlatform)
         {
-            currentAnimation = "Jump";
+            if (vspeed > 0.05)
+            {
+                currentAnimation = "Jump";
+            }
+            else if (vspeed < -0.05)
+            {
+                currentAnimation = "Fall";
+            }
         }
-        else if (vspeed < -0.05)
+        else
         {
-            currentAnimation = "Fall";
+            if (!collider.PlaceMeeting(x, y - 4, "Platform"))
+            {
+                onPlatform = false;
+            }
         }
 
         if (Abs(vspeed) > maxVspeed)
@@ -136,6 +148,19 @@ public class Player : MonoBehaviour
             }
         }
 
+        // Check platform
+        var platform = collider.InstancePlace(x, y, "Platform");
+        if (platform != null)
+        {
+            if (y - vspeed / 2 >= platform.transform.position.y)
+            {
+                y = platform.transform.position.y + 9;
+                onPlatform = true;
+                djump = true;
+                vspeed = 0;
+            }
+        }
+
         // Check killer
         if (collider.PlaceMeeting(x, y, "Killer"))
         {
@@ -153,13 +178,14 @@ public class Player : MonoBehaviour
     }
     void Jump()
     {
-        if (collider.PlaceMeeting(x, y - 1, "Block"))
+        if (collider.PlaceMeeting(x, y - 1, "Block") || collider.PlaceMeeting(x, y - 1, "Platform") || onPlatform)
         {
             vspeed = -jump;
             djump = true;
         }
         else if (djump)
         {
+            currentAnimation = "Jump";
             vspeed = -jump2;
             djump = false;
         }
