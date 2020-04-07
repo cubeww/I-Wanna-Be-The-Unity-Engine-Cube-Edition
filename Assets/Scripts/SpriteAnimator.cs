@@ -3,13 +3,13 @@ using System;
 
 public class SpriteAnimator : MonoBehaviour
 {
-    public SpriteAnimation[] animations;
+    public SpriteAnimation[] animations = new SpriteAnimation[1] { new SpriteAnimation() { name = "Default" } };
 
-    public string startAnimation;
+    public string startAnimation = "Default";
 
     string _currentAnimation;
 
-    string currentAnimation
+    public string currentAnimation
     {
         set
         {
@@ -31,6 +31,9 @@ public class SpriteAnimator : MonoBehaviour
     public float imageSpeed;
     public float imageIndex;
 
+    public delegate void OnAnimationEnd();
+    public OnAnimationEnd onAnimationEnd;
+
     SpriteRenderer spriteRenderer;
 
     private void Start()
@@ -42,8 +45,15 @@ public class SpriteAnimator : MonoBehaviour
     private void Update()
     {
         imageIndex += imageSpeed;
-        
+
         spriteRenderer.sprite = animation.sprites[(int)imageIndex % animation.sprites.Length];
+
+        if (imageIndex > animation.sprites.Length)
+        {
+            imageIndex -= (int)imageIndex;
+            if (onAnimationEnd != null)
+                onAnimationEnd();
+        }
     }
 }
 

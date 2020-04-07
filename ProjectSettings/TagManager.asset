@@ -8,6 +8,7 @@ TagManager:
   - Killer
   - Platform
   - Blood
+  - Bullet
   layers:
   - Default
   - TransparentFX

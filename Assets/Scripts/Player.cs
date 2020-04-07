@@ -18,21 +18,21 @@ public class Player : MonoBehaviour
     float vspeed = 0;
     float gravity = -0.4f;
 
-    public float x;
-    public float y;
+    float x { get => transform.position.x; set => transform.position = new Vector3(value, y, transform.position.z); }
+    float y { get => transform.position.y; set => transform.position = new Vector3(x, value, transform.position.z); }
+
     float xprevious;
     float yprevious;
 
     bool onPlatform = false;
 
     public GameObject sprite;
+    SpriteAnimator animator;
 
     public World world;
     PixelPerfectCollider collider;
     public BloodEmitter bloodEmitter;
     public Bullet bullet;
-
-    string currentAnimation;
 
     public AudioSource jumpSound;
     public AudioSource djumpSound;
@@ -46,14 +46,14 @@ public class Player : MonoBehaviour
         if (GameObject.FindObjectsOfType<World>().Length < 1)
         {
             GameObject.Instantiate(world);
-            World.autosave = true;
             World.gameStarted = true;
+            World.saveScene = SceneManager.GetActiveScene().name;
         }
 #endif
-        collider = GetComponent<PixelPerfectCollider>();
+        DontDestroyOnLoad(gameObject);
 
-        x = transform.position.x;
-        y = transform.position.y;
+        collider = GetComponent<PixelPerfectCollider>();
+        animator = sprite.GetComponent<SpriteAnimator>();
 
         if (World.autosave)
         {
@@ -88,11 +88,13 @@ public class Player : MonoBehaviour
             else if (h == 1)
                 sprite.transform.localScale = new Vector3(1, 1);
 
-            currentAnimation = "Running";
+            animator.currentAnimation = "Running";
+            animator.imageSpeed = 0.5f;
         }
         else
         {
-            currentAnimation = "Idle";
+            animator.currentAnimation = "Idle";
+            animator.imageSpeed = 0.2f;
         }
         hspeed = maxSpeed * h;
 
@@ -100,11 +102,11 @@ public class Player : MonoBehaviour
         {
             if (vspeed > 0.05)
             {
-                currentAnimation = "Jump";
+                animator.currentAnimation = "Jump";
             }
             else if (vspeed < -0.05)
             {
-                currentAnimation = "Fall";
+                animator.currentAnimation = "Fall";
             }
         }
         else
@@ -138,7 +140,8 @@ public class Player : MonoBehaviour
                 sprite.transform.localScale = new Vector3(1, 1);
 
             vspeed = -2;
-            currentAnimation = "Sliding";
+            animator.currentAnimation = "Sliding";
+            animator.imageSpeed = 0.5f;
 
             if ((onVineL && Input.GetKeyDown(KeyCode.RightArrow)) || (onVineR && Input.GetKeyDown(KeyCode.LeftArrow)))
             {
@@ -152,7 +155,7 @@ public class Player : MonoBehaviour
                     vspeed = 9;
 
                     walljumpSound.Play();
-                    currentAnimation = "Jump";
+                    animator.currentAnimation= "Jump";
                 }
                 else
                 {
@@ -161,7 +164,7 @@ public class Player : MonoBehaviour
                     else
                         hspeed = 3;
 
-                    currentAnimation = "Fall";
+                    animator.currentAnimation = "Fall";
                 }
             }
         }
@@ -232,10 +235,6 @@ public class Player : MonoBehaviour
             GameObject.Destroy(gameObject);
         }
 
-        // Update animation
-        if (!sprite.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(currentAnimation))
-            sprite.GetComponent<Animator>().Play(currentAnimation);
-
         // Update position
         transform.position = new Vector3(x, y);
     }
@@ -249,7 +248,7 @@ public class Player : MonoBehaviour
         }
         else if (djump)
         {
-            currentAnimation = "Jump";
+            animator.currentAnimation = "Jump";
             vspeed = -jump2;
             djump = false;
             djumpSound.Play();

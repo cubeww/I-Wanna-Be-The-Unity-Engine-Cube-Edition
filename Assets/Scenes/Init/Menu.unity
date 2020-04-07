@@ -1776,25 +1776,28 @@ Transform:
   m_Father: {fileID: 1727269995}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &368925434
-Animator:
-  serializedVersion: 3
+--- !u!114 &368925434
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368925432}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bb48904da931d5b4ea0515463ddc4583, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9bef64de8bfb1428aa39899bbdae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - name: Default
+    sprites:
+    - {fileID: 21300000, guid: 0f29f507d52c2a841b3063758c66af55, type: 3}
+    - {fileID: 21300000, guid: c58d3a889b6d7a64495f45ca0f88f913, type: 3}
+    - {fileID: 21300000, guid: 961f4cf7c11edec48b39e56586ad2a04, type: 3}
+    - {fileID: 21300000, guid: 0870e750888cebd4e98642fcba828950, type: 3}
+  startAnimation: Default
+  imageSpeed: 0.2
+  imageIndex: 0
 --- !u!212 &368925435
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1878,25 +1881,26 @@ Transform:
   m_Father: {fileID: 1727269995}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &368988222
-Animator:
-  serializedVersion: 3
+--- !u!114 &368988222
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368988220}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: daa354ccc88e34f43a68fde44acf930a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9bef64de8bfb1428aa39899bbdae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - name: Default
+    sprites:
+    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+  startAnimation: Default
+  imageSpeed: 0.06666667
+  imageIndex: 0
 --- !u!212 &368988223
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2202,25 +2206,26 @@ Transform:
   m_Father: {fileID: 1727269995}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &793756390
-Animator:
-  serializedVersion: 3
+--- !u!114 &793756390
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793756388}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: daa354ccc88e34f43a68fde44acf930a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9bef64de8bfb1428aa39899bbdae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - name: Default
+    sprites:
+    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+  startAnimation: Default
+  imageSpeed: 0.06666667
+  imageIndex: 0
 --- !u!212 &793756391
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2382,25 +2387,26 @@ Transform:
   m_Father: {fileID: 1727269995}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &846882686
-Animator:
-  serializedVersion: 3
+--- !u!114 &846882686
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846882684}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: daa354ccc88e34f43a68fde44acf930a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9bef64de8bfb1428aa39899bbdae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - name: Default
+    sprites:
+    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+  startAnimation: Default
+  imageSpeed: 0.06666667
+  imageIndex: 0
 --- !u!212 &846882687
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3640,25 +3646,26 @@ Transform:
   m_Father: {fileID: 1727269995}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1610576128
-Animator:
-  serializedVersion: 3
+--- !u!114 &1610576128
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610576126}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: daa354ccc88e34f43a68fde44acf930a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9bef64de8bfb1428aa39899bbdae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - name: Default
+    sprites:
+    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+  startAnimation: Default
+  imageSpeed: 0.06666667
+  imageIndex: 0
 --- !u!212 &1610576129
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3779,25 +3786,26 @@ Transform:
   m_Father: {fileID: 1727269995}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1858768708
-Animator:
-  serializedVersion: 3
+--- !u!114 &1858768708
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1858768706}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: daa354ccc88e34f43a68fde44acf930a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9bef64de8bfb1428aa39899bbdae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - name: Default
+    sprites:
+    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+  startAnimation: Default
+  imageSpeed: 0.06666667
+  imageIndex: 0
 --- !u!212 &1858768709
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4095,25 +4103,26 @@ Transform:
   m_Father: {fileID: 1727269995}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1921102965
-Animator:
-  serializedVersion: 3
+--- !u!114 &1921102965
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921102963}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: daa354ccc88e34f43a68fde44acf930a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9bef64de8bfb1428aa39899bbdae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - name: Default
+    sprites:
+    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+  startAnimation: Default
+  imageSpeed: 0.06666667
+  imageIndex: 0
 --- !u!212 &1921102966
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7940218150452588791}
   - component: {fileID: 7940218150452588790}
-  - component: {fileID: 7940218150452588789}
+  - component: {fileID: 1895064681232977378}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -83,25 +83,46 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7940218150452588789
-Animator:
-  serializedVersion: 3
+--- !u!114 &1895064681232977378
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7940218150452588784}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9c6dc321f78b40e4ba4f7c1463049ad5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9bef64de8bfb1428aa39899bbdae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - name: Idle
+    sprites:
+    - {fileID: 21300000, guid: 0f29f507d52c2a841b3063758c66af55, type: 3}
+    - {fileID: 21300000, guid: c58d3a889b6d7a64495f45ca0f88f913, type: 3}
+    - {fileID: 21300000, guid: 961f4cf7c11edec48b39e56586ad2a04, type: 3}
+    - {fileID: 21300000, guid: 0870e750888cebd4e98642fcba828950, type: 3}
+  - name: Running
+    sprites:
+    - {fileID: 21300000, guid: 98862920335001f4e82abc7521c22240, type: 3}
+    - {fileID: 21300000, guid: 33f2d485e7c004d4c96c264963c6327d, type: 3}
+    - {fileID: 21300000, guid: 905497e51edc4c1449525026e2b32546, type: 3}
+    - {fileID: 21300000, guid: f19e17683a657cd4c886757e5643df9a, type: 3}
+  - name: Jump
+    sprites:
+    - {fileID: 21300000, guid: 668e14b4561496045ab31093698565d0, type: 3}
+    - {fileID: 21300000, guid: 5277a4c41fe5def4987af53f13f0b3c3, type: 3}
+  - name: Fall
+    sprites:
+    - {fileID: 21300000, guid: acc90d1216b7b7549805a2e9c022ba3d, type: 3}
+    - {fileID: 21300000, guid: ce73d81ffe528f74b8ce3cdcb3d47a2f, type: 3}
+  - name: Sliding
+    sprites:
+    - {fileID: 21300000, guid: 7560a54c0f949d04a8afc52813dc552f, type: 3}
+    - {fileID: 21300000, guid: bc20883de4235f24fa3ab9fc36ac3cae, type: 3}
+  startAnimation: Idle
+  imageSpeed: 0.2
+  imageIndex: 0
 --- !u!1 &7940218150493441220
 GameObject:
   m_ObjectHideFlags: 0

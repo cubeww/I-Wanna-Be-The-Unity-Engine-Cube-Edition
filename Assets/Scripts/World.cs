@@ -33,6 +33,9 @@ public class World : MonoBehaviour
     public static float savePlayerY;
     public static int saveGrav;
 
+    public Player playerPrefab;
+    static Player _playerPrefab;
+
     // May move these to separate class
     public static Dictionary<Texture2D, MaskData> maskDataManager = new Dictionary<Texture2D, MaskData>();
     public static Dictionary<string, List<PixelPerfectCollider>> colliders = new Dictionary<string, List<PixelPerfectCollider>>();
@@ -46,6 +49,8 @@ public class World : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        _playerPrefab = playerPrefab;
 
         // Initialize game
         windowCaption.SetWindowCaption(roomCaption);
@@ -91,10 +96,13 @@ public class World : MonoBehaviour
         autosave = false;
         grav = saveGrav;
 
+        foreach (var p in GameObject.FindObjectsOfType<Player>())
+            GameObject.Destroy(p.gameObject);
+
+        var player = GameObject.Instantiate<Player>(_playerPrefab);
+        player.gameObject.transform.position = new Vector3(savePlayerX, savePlayerY);
+
         SceneManager.LoadScene(saveScene);
-        var player = GameObject.FindObjectOfType<Player>();
-        player.x = savePlayerX;
-        player.y = savePlayerY;
     }
 
     public static void SaveGame(bool savePosition)
@@ -103,8 +111,8 @@ public class World : MonoBehaviour
         {
             saveScene = SceneManager.GetActiveScene().name;
             var player = GameObject.FindObjectOfType<Player>();
-            savePlayerX = player.x;
-            savePlayerY = player.y;
+            savePlayerX = player.transform.position.x;
+            savePlayerY = player.transform.position.y;
             saveGrav = grav;
         }
 
@@ -124,17 +132,6 @@ public class World : MonoBehaviour
             Directory.CreateDirectory("Data");
 
         File.WriteAllText($"Data/save{savenum}", saveJson);
-    }
-
-    [DllImport("user32.dll")]
-    static extern short GetAsyncKeyState(int key);
-
-    // Using "Input.GetKey", unity cannot keep the key state when switching scenes
-    // This is not comfortable for the player to press the R key and then the arrow keys
-    // I can only think of this method, if you have a better one please tell me
-    public static bool GetKeyPersistently(int key)
-    {
-        return (GetAsyncKeyState(key) & 0x8000) != 0;
     }
 }
 
