@@ -62,7 +62,7 @@ public class DifficultyMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
-            World.savenum = select + 1;
+            World.instance.savenum = select + 1;
             SceneManager.LoadScene(difficultySelect);
         }
         var cursor = GameObject.Find("Cursor");

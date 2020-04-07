@@ -39,27 +39,31 @@ public class Player : MonoBehaviour
     public AudioSource shootSound;
     public AudioSource walljumpSound;
 
-    void Start()
-    {
 #if UNITY_EDITOR
+    private void Awake()
+    {
         // Do something to help us debug the level
         if (GameObject.FindObjectsOfType<World>().Length < 1)
         {
             GameObject.Instantiate(world);
-            World.gameStarted = true;
-            World.saveScene = SceneManager.GetActiveScene().name;
-            World.autosave = true;
+            World.instance.gameStarted = true;
+            World.instance.saveScene = SceneManager.GetActiveScene().name;
+            World.instance.autosave = true;
         }
+    }
 #endif
+
+    void Start()
+    {
         DontDestroyOnLoad(gameObject);
 
         collider = GetComponent<PixelPerfectCollider>();
         animator = sprite.GetComponent<SpriteAnimator>();
 
-        if (World.autosave)
+        if (World.instance.autosave)
         {
-            World.SaveGame(true);
-            World.autosave = false;
+            World.instance.SaveGame(true);
+            World.instance.autosave = false;
         }
     }
 
@@ -156,7 +160,7 @@ public class Player : MonoBehaviour
                     vspeed = 9;
 
                     walljumpSound.Play();
-                    animator.currentAnimation= "Jump";
+                    animator.currentAnimation = "Jump";
                 }
                 else
                 {
@@ -238,6 +242,7 @@ public class Player : MonoBehaviour
             var inst = GameObject.Instantiate(bloodEmitter);
             inst.transform.position = transform.position;
             GameObject.Destroy(gameObject);
+            World.instance.KillPlayer();
         }
 
         // Update position

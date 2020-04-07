@@ -29,29 +29,30 @@ public class WarpStart : MonoBehaviour
         {
             if (difficulty == Difficulty.LoadGame)
             {
-                if (File.Exists($"Data/save{World.savenum}"))
+                if (File.Exists($"Data/save{World.instance.savenum}"))
                 {
                     // Load exists game
-                    World.LoadGame(true);
+                    World.instance.LoadGame(true);
                 }
                 else
                 {
                     // Restart scene
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    
                 }
             }
             else
             {
                 // Start new game
-                World.gameStarted = true;
-                World.autosave = true;
+                World.instance.gameStarted = true;
+                World.instance.autosave = true;
 
-                World.difficulty = (World.Difficulty)difficulty;
+                World.instance.difficulty = (World.Difficulty)difficulty;
 
-                if (File.Exists($"Data/save{World.savenum}"))
-                    File.Delete($"Data/save{World.savenum}");
+                if (File.Exists($"Data/save{World.instance.savenum}"))
+                    File.Delete($"Data/save{World.instance.savenum}");
 
-                SceneManager.LoadScene(World.startScene);
+                SceneManager.LoadScene(World.instance.startScene);
             }
         }
     }

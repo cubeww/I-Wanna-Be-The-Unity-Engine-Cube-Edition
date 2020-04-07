@@ -43,17 +43,17 @@ public class PixelPerfectCollider : MonoBehaviour
         // Get mask data
         if (!enableSpriteAnimator)
         {
-            if (!World.maskDataManager.ContainsKey(texture))
+            if (!World.instance.maskDataManager.ContainsKey(texture))
             {
                 var maskData = GetMaskData(texture);
 
                 // Add to mask data manager to ensure we don't load repeatedly
-                World.maskDataManager[texture] = maskData;
+                World.instance.maskDataManager[texture] = maskData;
             }
             else
             {
                 // Load data directly from the mask data manager
-                maskData = World.maskDataManager[texture];
+                maskData = World.instance.maskDataManager[texture];
             }
         }
         else
@@ -65,17 +65,17 @@ public class PixelPerfectCollider : MonoBehaviour
                 {
                     texture = j.texture;
 
-                    if (!World.maskDataManager.ContainsKey(texture))
+                    if (!World.instance.maskDataManager.ContainsKey(texture))
                     {
                         var maskData = GetMaskData(texture);
 
                         // Add to mask data manager to ensure we don't load repeatedly
-                        World.maskDataManager[texture] = maskData;
+                        World.instance.maskDataManager[texture] = maskData;
                     }
                     else
                     {
                         // Load data directly from the mask data manager
-                        maskData = World.maskDataManager[texture];
+                        maskData = World.instance.maskDataManager[texture];
                     }
                 }
             }
@@ -85,11 +85,11 @@ public class PixelPerfectCollider : MonoBehaviour
         if (gameObject.tag == null)
             Debug.LogWarning($"Pixel perfect collidable game object \"{gameObject.name}\" is using a empty string tag !");
 
-        if (!World.colliders.ContainsKey(gameObject.tag))
+        if (!World.instance.colliders.ContainsKey(gameObject.tag))
         {
-            World.colliders[gameObject.tag] = new List<PixelPerfectCollider>();
+            World.instance.colliders[gameObject.tag] = new List<PixelPerfectCollider>();
         }
-        World.colliders[gameObject.tag].Add(this);
+        World.instance.colliders[gameObject.tag].Add(this);
     }
 
     public bool PlaceMeeting(float x, float y, string tag)
@@ -99,15 +99,15 @@ public class PixelPerfectCollider : MonoBehaviour
 
     public GameObject InstancePlace(float x, float y, string tag)
     {
-        if (!World.colliders.ContainsKey(tag))
+        if (!World.instance.colliders.ContainsKey(tag))
             return null;
 
-        var cders = World.colliders[tag];
+        var cders = World.instance.colliders[tag];
         if (cders.Count == 0)
             return null;
 
         if (enableSpriteAnimator)
-            maskData = World.maskDataManager[maskRenderer.sprite.texture];
+            maskData = World.instance.maskDataManager[maskRenderer.sprite.texture];
 
         var x1 = x;
         var y1 = y;
@@ -123,7 +123,7 @@ public class PixelPerfectCollider : MonoBehaviour
                 continue;
 
             if (i.enableSpriteAnimator)
-                i.maskData = World.maskDataManager[i.maskRenderer.sprite.texture];
+                i.maskData = World.instance.maskDataManager[i.maskRenderer.sprite.texture];
 
             var x2 = i.xPos;
             var y2 = i.yPos;
@@ -210,7 +210,7 @@ public class PixelPerfectCollider : MonoBehaviour
 
     void OnDestroy()
     {
-        World.colliders[gameObject.tag].Remove(this);
+        World.instance.colliders[gameObject.tag].Remove(this);
     }
 
     static void GetBoundingBox(int left, int right, int top, int bottom, out int left1, out int right1, out int top1, out int bottom1,

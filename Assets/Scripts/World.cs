@@ -6,13 +6,14 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class World : MonoBehaviour
+// World singleton helps us manage the game
+public class World : Singleton<World>
 {
     string roomCaption = "I Wanna Be The Unity Engine Cube Edition";
     WindowCaption windowCaption = new WindowCaption();
 
-    public static int savenum = 1;
-    public static Difficulty difficulty = Difficulty.Medium;
+    public int savenum = 1;
+    public Difficulty difficulty = Difficulty.Medium;
     public enum Difficulty
     {
         Medium = 0,
@@ -20,38 +21,28 @@ public class World : MonoBehaviour
         VeryHard = 2,
         Impossible = 3,
     }
-    public static int death = 0;
-    public static int time = 0;
-    public static int grav = 1;
+    public int death = 0;
+    public int time = 0;
+    public int grav = 1;
 
-    public static bool gameStarted = false;
-    public static bool autosave = false;
-    public static string startScene = "Stage01";
+    public bool gameStarted = false;
+    public bool autosave = false;
+    public string startScene = "Stage01";
 
-    public static string saveScene;
-    public static float savePlayerX;
-    public static float savePlayerY;
-    public static int saveGrav;
+    public string saveScene;
+    public float savePlayerX;
+    public float savePlayerY;
+    public int saveGrav;
 
     public Player playerPrefab;
-    static Player _playerPrefab;
+    public AudioSource deathSound;
 
     // May move these to separate class
-    public static Dictionary<Texture2D, MaskData> maskDataManager = new Dictionary<Texture2D, MaskData>();
-    public static Dictionary<string, List<PixelPerfectCollider>> colliders = new Dictionary<string, List<PixelPerfectCollider>>();
+    public Dictionary<Texture2D, MaskData> maskDataManager = new Dictionary<Texture2D, MaskData>();
+    public Dictionary<string, List<PixelPerfectCollider>> colliders = new Dictionary<string, List<PixelPerfectCollider>>();
 
     void Start()
     {
-        if (GameObject.FindObjectsOfType<World>().Length > 1)
-        {
-            Destroy(this);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-
-        _playerPrefab = playerPrefab;
-
         // Initialize game
         windowCaption.SetWindowCaption(roomCaption);
 
@@ -75,14 +66,14 @@ public class World : MonoBehaviour
         }
     }
 
-    public static void LoadGame(bool loadFile)
+    public void LoadGame(bool loadFile)
     {
         if (loadFile)
         {
             var saveJson = File.ReadAllText($"Data/save{savenum}");
             var saveFile = JsonUtility.FromJson<SaveFile>(saveJson);
 
-            death = saveFile.death;
+            instance.death = saveFile.death;
             time = saveFile.time;
 
             difficulty = saveFile.difficulty;
@@ -99,13 +90,13 @@ public class World : MonoBehaviour
         foreach (var p in GameObject.FindObjectsOfType<Player>())
             GameObject.Destroy(p.gameObject);
 
-        var player = GameObject.Instantiate<Player>(_playerPrefab);
+        var player = GameObject.Instantiate<Player>(playerPrefab);
         player.gameObject.transform.position = new Vector3(savePlayerX, savePlayerY);
 
         SceneManager.LoadScene(saveScene);
     }
 
-    public static void SaveGame(bool savePosition)
+    public void SaveGame(bool savePosition)
     {
         if (savePosition)
         {
@@ -135,6 +126,11 @@ public class World : MonoBehaviour
             Directory.CreateDirectory("Data");
 
         File.WriteAllText($"Data/save{savenum}", saveJson);
+    }
+    public void KillPlayer()
+    {
+        deathSound.Play();
+        death++;
     }
 }
 

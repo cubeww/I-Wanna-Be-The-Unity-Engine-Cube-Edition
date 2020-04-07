@@ -12,7 +12,7 @@ public class Save : MonoBehaviour
 
     private void Start()
     {
-        if ((int)World.difficulty > (int)World.Difficulty.Hard)
+        if ((int)World.instance.difficulty > (int)World.Difficulty.Hard)
         {
             GameObject.Destroy(gameObject);
             return;
@@ -57,7 +57,7 @@ public class Save : MonoBehaviour
                 animtor.imageIndex = 1;
                 animtor.imageSpeed = 0.017f;
                 timer = 30;
-                World.SaveGame(true);
+                World.instance.SaveGame(true);
             }
         }
     }
