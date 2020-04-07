@@ -9,6 +9,11 @@ TagManager:
   - Platform
   - Blood
   - Bullet
+  - Water
+  - Water2
+  - Water3
+  - WalljumpR
+  - WalljumpL
   layers:
   - Default
   - TransparentFX
@@ -60,4 +65,7 @@ TagManager:
     locked: 0
   - name: Killer
     uniqueID: 2259209365
+    locked: 0
+  - name: Water
+    uniqueID: 3259149347
     locked: 0

@@ -14,12 +14,12 @@ public class Player : MonoBehaviour
 
     public bool djump = true;
 
-    float hspeed = 0;
-    float vspeed = 0;
+    public float hspeed = 0;
+    public float vspeed = 0;
     float gravity = -0.4f;
 
-    float x { get => transform.position.x; set => transform.position = new Vector3(value, y, transform.position.z); }
-    float y { get => transform.position.y; set => transform.position = new Vector3(x, value, transform.position.z); }
+    public float x { get => transform.position.x; set => transform.position = new Vector3(value, y, transform.position.z); }
+    public float y { get => transform.position.y; set => transform.position = new Vector3(x, value, transform.position.z); }
 
     float xprevious;
     float yprevious;
@@ -221,10 +221,14 @@ public class Player : MonoBehaviour
         {
             if (y - vspeed / 2 >= platform.transform.position.y)
             {
-                y = platform.transform.position.y + 9;
+                var vsp = platform.GetComponent<MovingPlatform>().vspeed;
+                if (vsp <= 0)
+                {
+                    y = platform.transform.position.y + 9;
+                    vspeed = vsp;
+                }
                 onPlatform = true;
                 djump = true;
-                vspeed = 0;
             }
         }
 
@@ -241,18 +245,24 @@ public class Player : MonoBehaviour
     }
     void Jump()
     {
-        if (collider.PlaceMeeting(x, y - 1, "Block") || collider.PlaceMeeting(x, y - 1, "Platform") || onPlatform)
+        if (collider.PlaceMeeting(x, y - 1, "Block") || collider.PlaceMeeting(x, y - 1, "Platform") || onPlatform
+            || collider.PlaceMeeting(x, y - 1, "Water"))
         {
             vspeed = -jump;
             djump = true;
             jumpSound.Play();
         }
-        else if (djump)
+        else if (djump || collider.PlaceMeeting(x, y - 1, "Water2"))
         {
             animator.currentAnimation = "Jump";
             vspeed = -jump2;
             djump = false;
             djumpSound.Play();
+
+            if (!collider.PlaceMeeting(x, y - 1, "Water3"))
+                djump = false;
+            else
+                djump = true;
         }
     }
     void VJump()

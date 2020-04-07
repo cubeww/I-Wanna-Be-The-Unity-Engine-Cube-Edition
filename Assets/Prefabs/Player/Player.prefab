@@ -224,8 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5b6b166e611d345b99567392bf52a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  y: 0
+  djump: 1
+  hspeed: 0
+  vspeed: 0
   sprite: {fileID: 7940218150452588784}
   world: {fileID: 7254145588837832267, guid: 2a2d45928414c1e429b2adf664983a4c, type: 3}
   bloodEmitter: {fileID: 3852221451958636710, guid: fb3e764332f17b4469bd770c78c2a0f5, type: 3}
@@ -234,6 +235,7 @@ MonoBehaviour:
   djumpSound: {fileID: 3058102049328234408}
   shootSound: {fileID: 6394834811989796355}
   walljumpSound: {fileID: 1058181172341888765}
+  deathSound: {fileID: 0}
 --- !u!114 &7940218151522116037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5744ee1f931ca384b9f96d2eeaa668df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSpriteAnimator: 0
 --- !u!82 &9066045787296651755
 AudioSource:
   m_ObjectHideFlags: 0
