@@ -1896,8 +1896,8 @@ MonoBehaviour:
   animations:
   - name: Default
     sprites:
-    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
-    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+    - {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
+    - {fileID: 21300000, guid: 680e2f5676f97ac45a8e2e7a40ea1e18, type: 3}
   startAnimation: Default
   imageSpeed: 0.06666667
   imageIndex: 0
@@ -1941,7 +1941,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2221,8 +2221,8 @@ MonoBehaviour:
   animations:
   - name: Default
     sprites:
-    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
-    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+    - {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
+    - {fileID: 21300000, guid: 680e2f5676f97ac45a8e2e7a40ea1e18, type: 3}
   startAnimation: Default
   imageSpeed: 0.06666667
   imageIndex: 0
@@ -2266,7 +2266,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2402,8 +2402,8 @@ MonoBehaviour:
   animations:
   - name: Default
     sprites:
-    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
-    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+    - {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
+    - {fileID: 21300000, guid: 680e2f5676f97ac45a8e2e7a40ea1e18, type: 3}
   startAnimation: Default
   imageSpeed: 0.06666667
   imageIndex: 0
@@ -2447,7 +2447,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3661,8 +3661,8 @@ MonoBehaviour:
   animations:
   - name: Default
     sprites:
-    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
-    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+    - {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
+    - {fileID: 21300000, guid: 680e2f5676f97ac45a8e2e7a40ea1e18, type: 3}
   startAnimation: Default
   imageSpeed: 0.06666667
   imageIndex: 0
@@ -3706,7 +3706,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3801,8 +3801,8 @@ MonoBehaviour:
   animations:
   - name: Default
     sprites:
-    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
-    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+    - {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
+    - {fileID: 21300000, guid: 680e2f5676f97ac45a8e2e7a40ea1e18, type: 3}
   startAnimation: Default
   imageSpeed: 0.06666667
   imageIndex: 0
@@ -3846,7 +3846,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4118,8 +4118,8 @@ MonoBehaviour:
   animations:
   - name: Default
     sprites:
-    - {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
-    - {fileID: 21300000, guid: 8c0f4288059b57e4aa7c79a7bdce11e6, type: 3}
+    - {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
+    - {fileID: 21300000, guid: 680e2f5676f97ac45a8e2e7a40ea1e18, type: 3}
   startAnimation: Default
   imageSpeed: 0.06666667
   imageIndex: 0
@@ -4163,7 +4163,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7839aaee5d6855745a5ce3f940457151, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4661a73da02dc9b48ba214a102a4c681, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     float maxSpeed = 3;
     float maxVspeed = 9;
 
-    bool djump = true;
+    public bool djump = true;
 
     float hspeed = 0;
     float vspeed = 0;

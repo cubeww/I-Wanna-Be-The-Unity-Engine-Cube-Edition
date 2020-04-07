@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System;
 
+// Sprite Animator
+// Used to replace unity tedious animator
+// It also works well with pixel perfect collider
+
 public class SpriteAnimator : MonoBehaviour
 {
     public SpriteAnimation[] animations = new SpriteAnimation[1] { new SpriteAnimation() { name = "Default" } };
