@@ -26,7 +26,7 @@ public class SpriteAnimator : MonoBehaviour
         }
     }
 
-    SpriteAnimation animation;
+    public SpriteAnimation animation { get; private set; }
 
     public float imageSpeed;
     public float imageIndex;

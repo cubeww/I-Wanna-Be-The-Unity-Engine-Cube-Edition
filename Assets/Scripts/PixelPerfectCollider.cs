@@ -32,96 +32,53 @@ public class PixelPerfectCollider : MonoBehaviour
 
     float rotation { get => gameObject.transform.rotation.eulerAngles.z; }
 
+    public bool enableSpriteAnimator = false;
+    SpriteAnimator animator;
+
     void Start()
     {
         maskRenderer = GetComponent<SpriteRenderer>();
         var texture = maskRenderer.sprite.texture;
 
         // Get mask data
-        if (!World.maskDataManager.ContainsKey(texture))
+        if (!enableSpriteAnimator)
         {
-            maskData = new MaskData();
-
-            // Get bool data
-            var boolData = new bool[texture.width * texture.height];
-            for (var y = 0; y < texture.height; y++)
+            if (!World.maskDataManager.ContainsKey(texture))
             {
-                for (var x = 0; x < texture.width; x++)
-                {
-                    boolData[x + y * texture.width] = ((Color32)texture.GetPixel(x, y)).a != 0;
-                }
+                var maskData = GetMaskData(texture);
+
+                // Add to mask data manager to ensure we don't load repeatedly
+                World.maskDataManager[texture] = maskData;
             }
-            maskData.boolData = boolData;
-
-            // Get relative texture bounding box
-
-            // Get bbox bottom
-            for (var y = 0; y < texture.height; y++)
+            else
             {
-                for (var x = 0; x < texture.width; x++)
-                {
-                    if (((Color32)texture.GetPixel(x, y)).a != 0)
-                    {
-                        maskData.bottom = y - yPivot;
-                        goto OutBottom;
-                    }
-                }
+                // Load data directly from the mask data manager
+                maskData = World.maskDataManager[texture];
             }
-        OutBottom:
-
-            // Get bbox top
-            for (var y = texture.height - 1; y >= 0; y--)
-            {
-                for (var x = 0; x < texture.width; x++)
-                {
-                    if (((Color32)texture.GetPixel(x, y)).a != 0)
-                    {
-                        maskData.top = y - yPivot;
-                        goto OutTop;
-                    }
-                }
-            }
-        OutTop:
-
-            // Get bbox left
-            for (var x = 0; x < texture.width; x++)
-            {
-                for (var y = 0; y < texture.height; y++)
-                {
-                    if (((Color32)texture.GetPixel(x, y)).a != 0)
-                    {
-                        maskData.left = x - xPivot;
-                        goto OutLeft;
-                    }
-                }
-            }
-        OutLeft:
-
-            // Get bbox right
-            for (var x = texture.width - 1; x >= 0; x--)
-            {
-                for (var y = 0; y < texture.height; y++)
-                {
-                    if (((Color32)texture.GetPixel(x, y)).a != 0)
-                    {
-                        maskData.right = x - xPivot;
-                        goto OutRight;
-                    }
-                }
-            }
-        OutRight:
-
-            // Other stuff
-            maskData.width = texture.width;
-            maskData.height = texture.height;
-
-            // Add to mask data manager to ensure we don't load repeatedly
-            World.maskDataManager[texture] = maskData;
         }
         else
         {
-            // Load data directly from the mask data manager
-            maskData = World.maskDataManager[texture];
+            animator = gameObject.GetComponent<SpriteAnimator>();
+            foreach (var i in animator.animations)
+            {
+                foreach (var j in i.sprites)
+                {
+                    texture = j.texture;
+
+                    if (!World.maskDataManager.ContainsKey(texture))
+                    {
+                        var maskData = GetMaskData(texture);
+
+                        // Add to mask data manager to ensure we don't load repeatedly
+                        World.maskDataManager[texture] = maskData;
+                    }
+                    else
+                    {
+                        // Load data directly from the mask data manager
+                        maskData = World.maskDataManager[texture];
+                    }
+                }
+            }
         }
 
         // Add to colliders
@@ -149,6 +106,9 @@ public class PixelPerfectCollider : MonoBehaviour
         if (cders.Count == 0)
             return null;
 
+        if (enableSpriteAnimator)
+            maskData = World.maskDataManager[maskRenderer.sprite.texture];
+
         var x1 = x;
         var y1 = y;
 
@@ -161,6 +121,9 @@ public class PixelPerfectCollider : MonoBehaviour
         {
             if (i == this) // Don't check himself
                 continue;
+
+            if (i.enableSpriteAnimator)
+                i.maskData = World.maskDataManager[i.maskRenderer.sprite.texture];
 
             var x2 = i.xPos;
             var y2 = i.yPos;
@@ -297,6 +260,86 @@ public class PixelPerfectCollider : MonoBehaviour
     {
         ox = (xs - xo) * cosa - (ys - yo) * sina + xo;
         oy = (xs - xo) * sina + (ys - yo) * cosa + yo;
+    }
+
+    public MaskData GetMaskData(Texture2D texture)
+    {
+        maskData = new MaskData();
+
+        // Get bool data
+        var boolData = new bool[texture.width * texture.height];
+        for (var y = 0; y < texture.height; y++)
+        {
+            for (var x = 0; x < texture.width; x++)
+            {
+                boolData[x + y * texture.width] = ((Color32)texture.GetPixel(x, y)).a != 0;
+            }
+        }
+        maskData.boolData = boolData;
+
+        // Get relative texture bounding box
+
+        // Get bbox bottom
+        for (var y = 0; y < texture.height; y++)
+        {
+            for (var x = 0; x < texture.width; x++)
+            {
+                if (((Color32)texture.GetPixel(x, y)).a != 0)
+                {
+                    maskData.bottom = y - yPivot;
+                    goto OutBottom;
+                }
+            }
+        }
+    OutBottom:
+
+        // Get bbox top
+        for (var y = texture.height - 1; y >= 0; y--)
+        {
+            for (var x = 0; x < texture.width; x++)
+            {
+                if (((Color32)texture.GetPixel(x, y)).a != 0)
+                {
+                    maskData.top = y - yPivot;
+                    goto OutTop;
+                }
+            }
+        }
+    OutTop:
+
+        // Get bbox left
+        for (var x = 0; x < texture.width; x++)
+        {
+            for (var y = 0; y < texture.height; y++)
+            {
+                if (((Color32)texture.GetPixel(x, y)).a != 0)
+                {
+                    maskData.left = x - xPivot;
+                    goto OutLeft;
+                }
+            }
+        }
+    OutLeft:
+
+        // Get bbox right
+        for (var x = texture.width - 1; x >= 0; x--)
+        {
+            for (var y = 0; y < texture.height; y++)
+            {
+                if (((Color32)texture.GetPixel(x, y)).a != 0)
+                {
+                    maskData.right = x - xPivot;
+                    goto OutRight;
+                }
+            }
+        }
+    OutRight:
+
+        // Other stuff
+        maskData.width = texture.width;
+        maskData.height = texture.height;
+
+        return maskData;
     }
 }
 

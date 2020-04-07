@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
             GameObject.Instantiate(world);
             World.gameStarted = true;
             World.saveScene = SceneManager.GetActiveScene().name;
+            World.autosave = true;
         }
 #endif
         DontDestroyOnLoad(gameObject);
@@ -176,7 +177,7 @@ public class Player : MonoBehaviour
 
         // Collision
 
-        // Check block
+        // Block check
         if (collider.PlaceMeeting(x, y, "Block"))
         {
             x = xprevious;
@@ -214,7 +215,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        // Check platform
+        // Platform check
         var platform = collider.InstancePlace(x, y, "Platform");
         if (platform != null)
         {
@@ -227,7 +228,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        // Check killer
+        // Killer check
         if (collider.PlaceMeeting(x, y, "Killer"))
         {
             var inst = GameObject.Instantiate(bloodEmitter);

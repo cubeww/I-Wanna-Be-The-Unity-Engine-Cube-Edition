@@ -109,11 +109,14 @@ public class World : MonoBehaviour
     {
         if (savePosition)
         {
-            saveScene = SceneManager.GetActiveScene().name;
             var player = GameObject.FindObjectOfType<Player>();
-            savePlayerX = player.transform.position.x;
-            savePlayerY = player.transform.position.y;
-            saveGrav = grav;
+            if (player != null)
+            {
+                saveScene = SceneManager.GetActiveScene().name;
+                savePlayerX = player.transform.position.x;
+                savePlayerY = player.transform.position.y;
+                saveGrav = grav;
+            }
         }
 
         var saveFile = new SaveFile()
