@@ -57,14 +57,14 @@ TagManager:
   - name: Vine
     uniqueID: 2966261971
     locked: 0
+  - name: Killer
+    uniqueID: 2259209365
+    locked: 0
   - name: Platform
     uniqueID: 2825367461
     locked: 0
   - name: Player
     uniqueID: 2991620141
-    locked: 0
-  - name: Killer
-    uniqueID: 2259209365
     locked: 0
   - name: Water
     uniqueID: 3259149347

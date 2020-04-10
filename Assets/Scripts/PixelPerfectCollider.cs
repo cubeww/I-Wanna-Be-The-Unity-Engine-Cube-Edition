@@ -208,11 +208,6 @@ public class PixelPerfectCollider : MonoBehaviour
         return null;
     }
 
-    void OnDestroy()
-    {
-        World.instance.colliders[gameObject.tag].Remove(this);
-    }
-
     static void GetBoundingBox(int left, int right, int top, int bottom, out int left1, out int right1, out int top1, out int bottom1,
         float x, float y, float xscale, float yscale, float angle)
     {
@@ -340,6 +335,11 @@ public class PixelPerfectCollider : MonoBehaviour
         maskData.height = texture.height;
 
         return maskData;
+    }
+
+    void OnDestroy()
+    {
+        World.instance.colliders[gameObject.tag].Remove(this);
     }
 }
 

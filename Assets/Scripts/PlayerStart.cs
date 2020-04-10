@@ -6,7 +6,7 @@ public class PlayerStart : MonoBehaviour
 {
     public GameObject player;
 
-    void Start()
+    void Awake()
     {
         if (GameObject.FindObjectsOfType<Player>().Length == 0)
         {
